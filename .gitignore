@@ -51,6 +51,7 @@ desktop.ini
 
 # Logs
 *.log
+airflow/logs/
 
 # Docker
 docker-compose.override.yml
