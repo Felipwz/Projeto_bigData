@@ -341,15 +341,14 @@ Este script valida:
 
 ### Responsabilidades Individuais
 
-_[Preencher com os nomes e responsabilidades de cada membro do grupo]_
+Cada membro do grupo é responsável por explicar sua área específica durante a apresentação:
 
-| Nome | Responsabilidade |
-|------|------------------|
-| _Membro 1_ | Arquitetura e ETL |
-| _Membro 2_ | Análise exploratória e notebooks |
-| _Membro 3_ | Infraestrutura Docker |
-| _Membro 4_ | Dashboards e visualizações |
-| _Membro 5_ | Documentação e testes |
+| Membro | Área de Responsabilidade | Componentes | O que Explicar na Apresentação |
+|--------|--------------------------|-------------|--------------------------------|
+| **Pessoa 1** | **Arquitetura & Pipeline ETL** | • Data Lake (MinIO)<br>• Pipeline Bronze→Silver→Gold<br>• `src/etl.py` | • Como funciona a arquitetura Medallion<br>• Transformações em cada camada<br>• Por que MinIO e Parquet<br>• Fluxo de dados completo |
+| **Pessoa 2** | **Orquestração & Automação** | • Apache Airflow<br>• DAG (`mental_health_etl_dag.py`)<br>• Agendamento | • Como o Airflow orquestra o pipeline<br>• Tasks e dependências<br>• Agendamento @daily<br>• Monitoramento e logs |
+| **Pessoa 3** | **Infraestrutura & DevOps** | • Docker Compose<br>• PostgreSQL<br>• Metabase<br>• Configurações | • Como a infraestrutura funciona<br>• Serviços Docker (6 containers)<br>• Como rodar o projeto do zero<br>• Troubleshooting |
+| **Pessoa 4** | **Análise de Dados & Documentação** | • Jupyter Notebook<br>• Dicionário de dados<br>• Documentação técnica<br>• Validação | • Insights da análise exploratória<br>• Qualidade dos dados<br>• Visualizações e KPIs<br>• Estrutura da documentação |
 
 ---
 
