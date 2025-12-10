@@ -33,6 +33,10 @@ Analisar padrões de saúde mental na indústria tech, identificando correlaçõ
 
 ---
 
+**Documentação Confluence**
+
+ - https://vitorguimap.atlassian.net/wiki/external/YTNkMWJjODljZDkzNGViZThmZjlmYjRmMGVjMWQyODk
+
 ## 🏗️ Arquitetura
 
 ```
@@ -443,4 +447,4 @@ Este projeto é parte de um trabalho acadêmico para a disciplina de Big Data e 
 
 ---
 
-**Última atualização:** Novembro 2025
+**Última atualização:** Dezembro 2025
