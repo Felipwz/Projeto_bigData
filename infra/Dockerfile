@@ -1,21 +1,25 @@
-FROM python:3.11-slim
+FROM apache/airflow:2.8.0-python3.11
 
-WORKDIR /app
+USER root
 
 # Instala dependências do sistema
 RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copia requirements e instala dependências Python
+USER airflow
+
+WORKDIR /opt/airflow
+
+# Copia requirements e instala dependências Python como airflow user
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia código fonte
-COPY src/ ./src/
+COPY airflow/dags/ ./dags/
 COPY datasets/ ./datasets/
+COPY src/ ./src/
 
-# Define variáveis de ambiente padrão
+# Define variáveis de ambiente
 ENV PYTHONUNBUFFERED=1
-
-CMD ["python", "src/etl.py"]
+ENV AIRFLOW_HOME=/opt/airflow
