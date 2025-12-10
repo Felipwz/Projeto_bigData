@@ -135,22 +135,35 @@ docker-compose ps
 ```
 **No Metabase:**
 
-## Configuração do Banco de Dados no Airflow
-
 1. Clique na **engrengem (Admin)** → **Databases**  
 2. Clique em **+ Add database**  
 3. Selecione **PostgreSQL**  
 4. Preencha os campos conforme abaixo:
 
    - **Database name:** `airflow`
+   - **Display name:** `Airflow DB (PostgreSQL)`
    - **Host:** `postgres`
    - **Port:** `5432`
-   - **Database name:** `airflow`
    - **Username:** `airflow`
    - **Password:** `airflow`
 
 5. Clique em **Save**
 
+### Configuração do Data Lake (MinIO) no Metabase
+
+Para visualizar os dados das camadas Silver e Gold, é preciso conectar o Metabase ao MinIO. Como o Metabase não possui um conector nativo para MinIO/S3, a abordagem recomendada neste projeto é carregar os dados agregados (camada Gold) no PostgreSQL para facilitar a visualização.
+
+1.  **Carregar Dados no PostgreSQL:**
+    O projeto inclui um script para carregar os dados do MinIO para o PostgreSQL. Execute o seguinte comando no terminal, na raiz do projeto, para popular as tabelas que o Metabase irá ler.
+
+    ```bash
+    # O comando abaixo executa o script que lê os arquivos .parquet do MinIO 
+    # e os insere como tabelas no banco 'airflow' do PostgreSQL.
+    docker-compose -f infra/docker-compose.yml exec airflow-scheduler python /opt/airflow/src/load_to_postgres.py
+    ```
+
+2.  **Explorar no Metabase:**
+    Após executar o script, novas tabelas (ex: `gold_remote_work_treatment`) estarão disponíveis no database `Airflow DB (PostgreSQL)` dentro do Metabase, prontas para serem usadas em perguntas e dashboards.
 
 **Exemplos de consulta para o dashboard**
 
@@ -167,14 +180,28 @@ Camada Silver
 SELECT * FROM silver_layer LIMIT 10;
 SELECT gender, COUNT(*) FROM silver_layer GROUP BY gender;
 SELECT remote_work, treatment, COUNT(*) FROM silver_layer GROUP BY remote_work, treatment;
-```
+
 ```
 Camada Gold
 
 SELECT * FROM gold_remote_work_treatment;
 SELECT * FROM gold_country_distribution ORDER BY count DESC LIMIT 10;
 ```
-
+gittgt
+-- Análise por faixa etária e tratamento
+SELECT
+    CASE
+        WHEN age BETWEEN 18 AND 25 THEN '18-25'
+        WHEN age BETWEEN 26 AND 35 THEN '26-35'
+        WHEN age BETWEEN 36 AND 45 THEN '36-45'
+        WHEN age BETWEEN 46 AND 60 THEN '46-60'
+        ELSE '60+'
+    END as faixa_etaria,
+    treatment,
+    COUNT(*) as quantidade
+FROM silver_layer
+GROUP BY faixa_etaria, treatment
+ORDER BY faixa_etaria, treatment;
 
 Comando para alimentar Postgres com os dados do minio
 
@@ -374,6 +401,7 @@ Este script valida:
 ## 📈 Melhorias Futuras
 
 - [ ] Adicionar Apache Airflow para orquestração
+- [ ] Refinar a orquestração com Airflow (ex: adicionar alertas em caso de falha, usar XComs para passar metadados entre tarefas)
 - [ ] Implementar testes unitários (pytest)
 - [ ] Adicionar Great Expectations para data quality
 - [ ] Migrar para PySpark para escalabilidade
