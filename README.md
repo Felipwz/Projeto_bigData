@@ -424,10 +424,10 @@ Cada membro do grupo é responsável por explicar sua área específica durante 
 
 | Membro | Área de Responsabilidade | Componentes | O que Explicar na Apresentação |
 |--------|--------------------------|-------------|--------------------------------|
-| **Pessoa 1** | **Arquitetura & Pipeline ETL** | • Data Lake (MinIO)<br>• Pipeline Bronze→Silver→Gold<br>• `src/etl.py` | • Como funciona a arquitetura Medallion<br>• Transformações em cada camada<br>• Por que MinIO e Parquet<br>• Fluxo de dados completo |
-| **Pessoa 2** | **Orquestração & Automação** | • Apache Airflow<br>• DAG (`mental_health_etl_dag.py`)<br>• Agendamento | • Como o Airflow orquestra o pipeline<br>• Tasks e dependências<br>• Agendamento @daily<br>• Monitoramento e logs |
-| **Pessoa 3** | **Infraestrutura & DevOps** | • Docker Compose<br>• PostgreSQL<br>• Metabase<br>• Configurações | • Como a infraestrutura funciona<br>• Serviços Docker (6 containers)<br>• Como rodar o projeto do zero<br>• Troubleshooting |
-| **Pessoa 4** | **Análise de Dados & Documentação** | • Jupyter Notebook<br>• Dicionário de dados<br>• Documentação técnica<br>• Validação | • Insights da análise exploratória<br>• Qualidade dos dados<br>• Visualizações e KPIs<br>• Estrutura da documentação |
+| **Natan** | **Arquitetura & Pipeline ETL** | • Data Lake (MinIO)<br>• Pipeline Bronze→Silver→Gold<br>• `src/etl.py` | • Como funciona a arquitetura Medallion<br>• Transformações em cada camada<br>• Por que MinIO e Parquet<br>• Fluxo de dados completo |
+| **Leonardo** | **Orquestração & Automação** | • Apache Airflow<br>• DAG (`mental_health_etl_dag.py`)<br>• Agendamento | • Como o Airflow orquestra o pipeline<br>• Tasks e dependências<br>• Agendamento @daily<br>• Monitoramento e logs |
+| **Vitor** | **Infraestrutura & DevOps** | • Docker Compose<br>• PostgreSQL<br>• Metabase<br>• Configurações | • Como a infraestrutura funciona<br>• Serviços Docker (6 containers)<br>• Como rodar o projeto do zero<br>• Troubleshooting |
+| **Luiz Felipe** | **Análise de Dados & Documentação** | • Jupyter Notebook<br>• Dicionário de dados<br>• Documentação técnica<br>• Validação | • Insights da análise exploratória<br>• Qualidade dos dados<br>• Visualizações e KPIs<br>• Estrutura da documentação |
 
 ---
 
@@ -441,9 +441,13 @@ Em caso de dúvidas ou problemas:
 
 ---
 
-## 📄 Licença
+##  Equipe
 
-Este projeto é parte de um trabalho acadêmico para a disciplina de Big Data e Ciência de Dados.
+- Luiz Felipe S. de Souza (6324548)
+- Leonardo Frazão Sano (6324073)
+- Natan Borges Leme (6324696)
+- Vitor Pinheiro Guimarães (6324680)
+
 
 ---
 
