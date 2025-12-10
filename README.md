@@ -133,6 +133,53 @@ docker-compose logs -f airflow-init
 # Verifique os serviços
 docker-compose ps
 ```
+**No Metabase:**
+
+## Configuração do Banco de Dados no Airflow
+
+1. Clique na **engrengem (Admin)** → **Databases**  
+2. Clique em **+ Add database**  
+3. Selecione **PostgreSQL**  
+4. Preencha os campos conforme abaixo:
+
+   - **Database name:** `airflow`
+   - **Host:** `postgres`
+   - **Port:** `5432`
+   - **Database name:** `airflow`
+   - **Username:** `airflow`
+   - **Password:** `airflow`
+
+5. Clique em **Save**
+
+
+**Exemplos de consulta para o dashboard**
+
+```
+Camada Bronze
+
+SELECT * FROM bronze_layer LIMIT 10;
+SELECT COUNT(*) FROM bronze_layer;
+SELECT DISTINCT gender, COUNT(*) FROM bronze_layer GROUP BY gender;
+```
+```
+Camada Silver
+
+SELECT * FROM silver_layer LIMIT 10;
+SELECT gender, COUNT(*) FROM silver_layer GROUP BY gender;
+SELECT remote_work, treatment, COUNT(*) FROM silver_layer GROUP BY remote_work, treatment;
+```
+```
+Camada Gold
+
+SELECT * FROM gold_remote_work_treatment;
+SELECT * FROM gold_country_distribution ORDER BY count DESC LIMIT 10;
+```
+
+
+Comando para alimentar Postgres com os dados do minio
+
+Alterar de acordo com o computador o path
+cd /home/guima/Documents/Projeto_bigData/infra && docker-compose exec -T airflow-scheduler python /opt/airflow/src/load_to_postgres.py 2>&1 | tail -30
 
 **Serviços disponíveis:**
 - **Airflow UI**: http://localhost:8080 (admin / admin)
